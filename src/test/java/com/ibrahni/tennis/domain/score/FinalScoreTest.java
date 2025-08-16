@@ -39,6 +39,6 @@ class FinalScoreTest {
 
         finalScore.display(displayer);
 
-        verify(displayer, times(1)).displayWinner(player1);
+        verify(displayer, times(1)).display(player1);
     }
 }

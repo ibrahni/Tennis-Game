@@ -1,7 +1,7 @@
 package com.ibrahni.tennis.domain;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.ibrahni.tennis.domain.score.FinalScore;
@@ -16,16 +16,16 @@ public class TennisGame {
     private final Player player1;
     private final Player player2;
 
-    private final Deque<GameScore> scores = new ArrayDeque<>();
+    private final List<GameScore> scores = new ArrayList<>();
 
     public TennisGame(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
-        scores.push(new IncrementalScore(player1, player2));
+        scores.add(new IncrementalScore(player1, player2));
     }
 
     public Boolean finished() {
-        return scores.peek() instanceof FinalScore;
+        return scores.getLast() instanceof FinalScore;
     }
 
     public void roundWin(Player player) {
@@ -34,7 +34,7 @@ public class TennisGame {
         }
 
         if (existsInTheGame(player)) {
-            scores.push(scores.peek()
+            scores.add(scores.getLast()
                 .increment(player));
         } else {
             throw new TennisGameException(PLAYER_NOT_IN_THE_GAME_ERROR_MESSAGE);
@@ -46,7 +46,8 @@ public class TennisGame {
     }
 
     public void displayActualState(GameDisplayer gameDisplayer) {
-        gameDisplayer.display(scores.peek());
+        scores.getLast()
+            .display(gameDisplayer);
     }
 
 }

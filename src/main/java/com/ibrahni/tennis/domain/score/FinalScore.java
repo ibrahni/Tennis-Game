@@ -23,7 +23,7 @@ public class FinalScore extends IncrementalScore {
 
     @Override
     public void display(GameDisplayer displayer) {
-        displayer.displayWinner(winner);
+        displayer.display(winner);
     }
 
     public Player getWinner() {

@@ -15,7 +15,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.ibrahni.tennis.domain.Player;
-import com.ibrahni.tennis.domain.score.GameScore;
 import com.ibrahni.tennis.main.OutputStreamDisplayer;
 import com.ibrahni.tennis.main.TennisGameSimulation;
 
@@ -35,11 +34,11 @@ class TennisGameSimulationTest {
     @Test
     void givenTheSequenceOfPlayersWins_whenSimulatingTennisGame_shouldDisplayWinsSteps() {
         doCallRealMethod().when(gameDisplayer)
-            .display(any(GameScore.class));
-        doCallRealMethod().when(gameDisplayer)
             .display(anyMap());
         doCallRealMethod().when(gameDisplayer)
-            .displayWinner(any());
+            .display(any(Player.class));
+        doCallRealMethod().when(gameDisplayer)
+            .display(anyString());
 
         tennisGameSimulation.simulate("ABABAA");
 
@@ -62,11 +61,9 @@ class TennisGameSimulationTest {
     @Test
     void givenTheSequenceOfPlayersWins_whenSimulatingTennisGameWinWithDeuceAndAdvantage_shouldDisplayWinsSteps() {
         doCallRealMethod().when(gameDisplayer)
-            .display(any(GameScore.class));
-        doCallRealMethod().when(gameDisplayer)
             .display(anyMap());
         doCallRealMethod().when(gameDisplayer)
-            .displayWinner(any());
+            .display(any(Player.class));
         doCallRealMethod().when(gameDisplayer)
             .display(anyString());
 
