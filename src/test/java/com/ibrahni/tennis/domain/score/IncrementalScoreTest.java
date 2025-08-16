@@ -1,6 +1,10 @@
 package com.ibrahni.tennis.domain.score;
 
+import static com.ibrahni.tennis.domain.score.ScoreValue.FORTY;
+import static com.ibrahni.tennis.domain.score.ScoreValue.THIRTY;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +24,18 @@ class IncrementalScoreTest {
 
         assertInstanceOf(FinalScore.class, result);
         assertEquals(player1, ((FinalScore) result).getWinner());
+    }
+
+    @Test
+    void givenAnIncrementalScoreOfAPlayer_whenBothReachForty_shouldReturnADeuceScore() {
+        final Player player1 = new Player("A");
+        final Player player2 = new Player("B");
+
+        GameScore score = new IncrementalScore(Map.of(player1, FORTY, player2, THIRTY));
+
+        GameScore result = score.increment(player2);
+
+        assertInstanceOf(DeuceScore.class, result);
     }
 
 }

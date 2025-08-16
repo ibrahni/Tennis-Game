@@ -4,8 +4,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.ibrahni.tennis.domain.GameDisplayer;
-import com.ibrahni.tennis.domain.score.GameScore;
 import com.ibrahni.tennis.domain.Player;
+import com.ibrahni.tennis.domain.score.GameScore;
 import com.ibrahni.tennis.domain.score.ScoreValue;
 
 public class OutputStreamDisplayer implements GameDisplayer {

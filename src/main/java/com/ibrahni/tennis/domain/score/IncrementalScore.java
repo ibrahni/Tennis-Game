@@ -7,6 +7,7 @@ import static com.ibrahni.tennis.domain.score.ScoreValue.THIRTY;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import com.ibrahni.tennis.domain.GameDisplayer;
 import com.ibrahni.tennis.domain.Player;
@@ -34,13 +35,24 @@ public class IncrementalScore implements GameScore {
             default -> FORTY;
         };
 
-        final Map<Player, ScoreValue> mapScore = new LinkedHashMap<>(actualScore);
-        mapScore.put(player, newScore);
+        final Map<Player, ScoreValue> newMapScore = new LinkedHashMap<>(actualScore);
+        newMapScore.put(player, newScore);
 
+        //this case is only possible when player score is and was FORTY
         if (newScore == existingScore) {
-            return new FinalScore(mapScore, player);
+            return new FinalScore(newMapScore, player);
         }
-        return new IncrementalScore(mapScore);
+        if (isDeuce(newMapScore)) {
+            return new DeuceScore(newMapScore);
+        }
+        return new IncrementalScore(newMapScore);
+    }
+
+    private boolean isDeuce(Map<Player, ScoreValue> newScore) {
+        return newScore.values()
+            .stream()
+            .filter(value -> Objects.equals(value, FORTY))
+            .count() == 2;
     }
 
     @Override

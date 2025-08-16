@@ -2,6 +2,7 @@ package com.ibrahni.tennis;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyMap;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.times;
 
@@ -51,6 +52,35 @@ class TennisGameSimulationTest {
             .display("Player A : 40 / Player B : 30");
         inOrder.verify(gameDisplayer, times(1))
             .display("Player A wins the game");
+    }
+
+    @Test
+    void givenTheSequenceOfPlayersWins_whenSimulatingTennisGameWinWithDeuceAndAdvantage_shouldDisplayWinsSteps() {
+        doCallRealMethod().when(gameDisplayer)
+            .display(any(GameScore.class));
+        doCallRealMethod().when(gameDisplayer)
+            .display(anyMap());
+        doCallRealMethod().when(gameDisplayer)
+            .displayWinner(any());
+        doCallRealMethod().when(gameDisplayer)
+            .display(anyString());
+        tennisGameSimulation.simulate("ABABABBB", "A", "B");
+        InOrder inOrder = Mockito.inOrder(gameDisplayer);
+
+        inOrder.verify(gameDisplayer, times(1))
+            .display("Player A : 15 / Player B : 0");
+        inOrder.verify(gameDisplayer, times(1))
+            .display("Player A : 15 / Player B : 15");
+        inOrder.verify(gameDisplayer, times(1))
+            .display("Player A : 30 / Player B : 15");
+        inOrder.verify(gameDisplayer, times(1))
+            .display("Player A : 30 / Player B : 30");
+        inOrder.verify(gameDisplayer, times(1))
+            .display("Player A : 40 / Player B : 30");
+        inOrder.verify(gameDisplayer, times(2))
+            .display("Player A : 40 / Player B : 40");
+        inOrder.verify(gameDisplayer, times(1))
+            .display("Player B wins the game");
     }
 }
 
