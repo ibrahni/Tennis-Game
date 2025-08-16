@@ -1,5 +1,8 @@
 package com.ibrahni.tennis;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyMap;
+import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.times;
 
 import org.junit.jupiter.api.Test;
@@ -10,19 +13,29 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.ibrahni.tennis.main.OutputStreamDisplayer;
+import com.ibrahni.tennis.domain.score.GameScore;
+import com.ibrahni.tennis.main.TennisGameSimulation;
+
 @ExtendWith(MockitoExtension.class)
 class TennisGameSimulationTest {
 
     @Mock
-    private GameDisplayer gameDisplayer;
+    private OutputStreamDisplayer gameDisplayer;
 
     @InjectMocks
-    private TennisGameSimulation simulation;
+    private TennisGameSimulation tennisGameSimulation;
 
     @Test
     void givenTheSequenceOfPlayersWins_whenSimulatingTennisGame_shouldDisplayWinsSteps() {
+        doCallRealMethod().when(gameDisplayer)
+            .display(any(GameScore.class));
+        doCallRealMethod().when(gameDisplayer)
+            .display(anyMap());
+        doCallRealMethod().when(gameDisplayer)
+            .displayWinner(any());
 
-        simulation.simulate("ABABAA");
+        tennisGameSimulation.simulate("ABABAA", "A", "B");
 
         InOrder inOrder = Mockito.inOrder(gameDisplayer);
 
