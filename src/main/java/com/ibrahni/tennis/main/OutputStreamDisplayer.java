@@ -14,7 +14,7 @@ public class OutputStreamDisplayer implements GameDisplayer {
     }
 
     @Override
-    public void display(final Map<Player, ScoreValue> actualScore) {
+    public void displayScore(final Map<Player, ScoreValue> actualScore) {
         final String result = actualScore.entrySet()
             .stream()
             .map((entry) -> {
@@ -28,7 +28,7 @@ public class OutputStreamDisplayer implements GameDisplayer {
     }
 
     @Override
-    public void display(final Player winner) {
-        display("%s wins the game".formatted(winner.displayName()));
+    public void displayWinner(final Player player) {
+        display("%s wins the game".formatted(player.displayName()));
     }
 }

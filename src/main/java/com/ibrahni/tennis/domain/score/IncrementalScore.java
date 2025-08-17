@@ -57,6 +57,6 @@ public class IncrementalScore implements GameScore {
 
     @Override
     public void display(GameDisplayer displayer) {
-        displayer.display(Collections.unmodifiableMap(new LinkedHashMap<>(actualScore)));
+        displayer.displayScore(Collections.unmodifiableMap(new LinkedHashMap<>(actualScore)));
     }
 }

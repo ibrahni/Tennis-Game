@@ -1,7 +1,6 @@
 package com.ibrahni.tennis;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.times;
@@ -34,9 +33,9 @@ class TennisGameSimulationTest {
     @Test
     void givenTheSequenceOfPlayersWins_whenSimulatingTennisGame_shouldDisplayWinsSteps() {
         doCallRealMethod().when(gameDisplayer)
-            .display(anyMap());
+            .displayScore(any());
         doCallRealMethod().when(gameDisplayer)
-            .display(any(Player.class));
+            .displayWinner(any());
         doCallRealMethod().when(gameDisplayer)
             .display(anyString());
 
@@ -61,9 +60,9 @@ class TennisGameSimulationTest {
     @Test
     void givenTheSequenceOfPlayersWins_whenSimulatingTennisGameWinWithDeuceAndAdvantage_shouldDisplayWinsSteps() {
         doCallRealMethod().when(gameDisplayer)
-            .display(anyMap());
+            .displayScore(any());
         doCallRealMethod().when(gameDisplayer)
-            .display(any(Player.class));
+            .displayWinner(any());
         doCallRealMethod().when(gameDisplayer)
             .display(anyString());
 
